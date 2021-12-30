@@ -21,3 +21,16 @@ if __name__ == '__main__':
   dt_features = StandardScaler().fit_transform(dt_features)
 
   X_train, X_test, y_train, y_test = train_test_split(dt_features, dt_target, test_size=0.3, random_state=1)
+
+  print(X_train.shape)
+  print(y_train.shape)
+
+  pca = PCA(n_components=3)
+  pca.fit(X_train)
+
+  ipca = IncrementalPCA(n_components=3, batch_size=50)
+  ipca.fit(X_train)
+
+  plt.plot(range(len(pca.explained_variance_)), pca.explained_variance_ratio_)
+  plt.show()
+  
